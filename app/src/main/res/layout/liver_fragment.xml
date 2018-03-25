@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.sayan.hms.mFragments.LiverFragment" >
+
+    <LinearLayout
+        android:focusableInTouchMode="true"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_calcLiver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <EditText
+                android:layout_margin="2dp"
+                android:layout_weight="0.5"
+                android:id="@+id/etLivAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baumans"
+                android:hint="Age"
+                android:inputType="numberDecimal"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:layout_margin="2dp"
+                android:id="@+id/spiner_LivGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Gender (Male =1 / Female = 2 )"
+                android:inputType="numberDecimal"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="horizontal"
+    android:weightSum="1">
+
+    <EditText
+        android:layout_margin="2dp"
+        android:layout_weight="0.5"
+        android:id="@+id/etLivTotBili"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/baumans"
+        android:hint="Total Bilirubin "
+        android:inputType="numberDecimal"
+        android:padding="8dp"
+        android:textColor="@color/secondaryDarkColor"
+        android:textColorLink="@color/secondaryDarkColor"
+        android:textCursorDrawable="@drawable/blue_cursor"
+        android:textSize="16sp" />
+        <EditText
+            android:layout_margin="2dp"
+            android:id="@+id/etLivDirBili"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/baumans"
+            android:hint="Direct Bilirubin "
+            android:padding="8dp"
+            android:textColor="@color/secondaryDarkColor"
+            android:textColorLink="@color/secondaryDarkColor"
+            android:textCursorDrawable="@drawable/blue_cursor"
+            android:textSize="16sp" />
+
+</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:layout_margin="2dp"
+                android:layout_weight="0.5"
+                android:id="@+id/etLivAlkaline_Phosphotase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Alkaline_Phosphotase"
+                android:inputType="numberDecimal"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+            <EditText
+                android:layout_margin="2dp"
+                android:id="@+id/etLivAlamine_Aminotransferase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Alamine_Aminotransferase"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:layout_margin="2dp"
+                android:layout_weight="0.5"
+                android:id="@+id/etLivAspartate_Aminotransferase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Aspartate_Aminotransferase"
+                android:inputType="numberDecimal"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+            <EditText
+                android:layout_margin="2dp"
+                android:id="@+id/etLivTotal_Protiens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Total_Protiens"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:layout_weight="0.5"
+                android:layout_margin="2dp"
+                android:id="@+id/etLivAlbumin_and_Globulin_Ratio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Albumin_and_Globulin_Ratio"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_margin="2dp"
+
+                android:id="@+id/etLivAlbumin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/baumans"
+                android:hint="Albumin"
+                android:inputType="numberDecimal"
+                android:padding="8dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textColorLink="@color/secondaryDarkColor"
+                android:textCursorDrawable="@drawable/blue_cursor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_calcLiver"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buttonshape"
+        android:backgroundTint="@color/primaryColor"
+        android:fontFamily="@font/baumans"
+        android:padding="5dp"
+        android:text="Calculate"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linLiver_result_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linLiver_result_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baumans"
+                android:text="Logistic Regression Result(probability) :"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:fontFamily="@font/baumans"
+                android:id="@+id/tvLivRegression"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondaryDarkColor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

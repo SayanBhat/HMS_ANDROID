@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/secondaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="android:colorPrimary">@color/primaryColor</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="android:textColorPrimary">@color/secondaryDarkColor</item>
+        <item name="android:colorBackground">@color/secondaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryLightColor</item>
+        <item name="android:navigationBarColor">@color/primaryColor</item>
+    </style>
+</resources>
