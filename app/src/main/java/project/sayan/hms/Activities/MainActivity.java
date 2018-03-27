@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ViewPager_MainFragment()).commit();
         toolbar.setTitle("Home");
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ViewPager_MainFragment()).commit();
+
     }
 
     @Override
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_healthnews) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new HealthNewsFragment()).commit();
-            toolbar.setTitle("Health Tips");
+            toolbar.setTitle("Health News");
         } else if (id == R.id.nav_logout) {
 
         }

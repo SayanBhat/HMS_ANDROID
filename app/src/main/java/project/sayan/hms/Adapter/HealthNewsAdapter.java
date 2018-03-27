@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.zip.Inflater;
 
 import project.sayan.hms.Model.HealthNewsModel;
@@ -20,10 +22,10 @@ import project.sayan.hms.R;
 
 public class HealthNewsAdapter extends BaseAdapter {
 
-    HealthNewsModel model;
+    HealthNewsModel model = new HealthNewsModel();
     Context context;
 
-    HealthNewsAdapter(Context context, HealthNewsModel model)
+    public HealthNewsAdapter(Context context, HealthNewsModel model)
     {
         this.context=context;
         this.model=model;
@@ -56,6 +58,15 @@ public class HealthNewsAdapter extends BaseAdapter {
         TextView tvDesc= convertView.findViewById(R.id.listrow_tvdescription);
         TextView tvDate= convertView.findViewById(R.id.listrow_tvdate);
         TextView tvAuthor= convertView.findViewById(R.id.listrow_tvauthor);
+
+
+        tvTitle.setText(model.articles.get(position).title);
+        tvAuthor.setText("Author: "+model.articles.get(position).author);
+        tvDate.setText("Date: "+model.articles.get(position).publishedAt.substring(0,10));
+        tvDesc.setText(model.articles.get(position).description);
+        Glide.with(context)
+                .load(model.articles.get(position).urlToImage)
+                .into(img);
 
         return convertView;
     }

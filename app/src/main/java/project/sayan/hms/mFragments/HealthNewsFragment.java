@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import project.sayan.hms.Adapter.HealthNewsAdapter;
 import project.sayan.hms.Model.HealthNewsModel;
 import project.sayan.hms.Model.LiverAttributesModel;
 import project.sayan.hms.R;
@@ -23,20 +24,26 @@ import project.sayan.hms.mServices.HealthNewsHttpService;
 public class HealthNewsFragment extends Fragment {
 
     private ListView listView;
+    HealthNewsModel result = new HealthNewsModel();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.healthnews_fragment_layout,container,false);
+        View rootView = inflater.inflate(R.layout.healthnews_fragment_layout, container, false);
 
-        listView=rootView.findViewById(R.id.listview_healthNews);
-        HealthNewsHttpService service=new HealthNewsHttpService();
+        listView = rootView.findViewById(R.id.listview_healthNews);
+        HealthNewsHttpService service = new HealthNewsHttpService(getContext());
+
 
         service.getExecute(new HealthNewsVolleyCallback() {
             @Override
             public void onSuccess(HealthNewsModel response) {
-
+                result = response;
+                HealthNewsAdapter adapter = new HealthNewsAdapter(getContext(), result);
+                listView.setAdapter(adapter);
             }
         });
+
 
         return rootView;
     }
