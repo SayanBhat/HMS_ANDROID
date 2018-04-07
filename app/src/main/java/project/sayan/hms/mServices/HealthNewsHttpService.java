@@ -1,6 +1,9 @@
 package project.sayan.hms.mServices;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -33,6 +36,7 @@ public class HealthNewsHttpService {
     HealthNewsModel model;
     final String TAG = "HealthNewsHttpService";
     Context context;
+    ProgressDialog progressDialog;
 
 
     public HealthNewsHttpService(Context context) {
@@ -41,18 +45,34 @@ public class HealthNewsHttpService {
     }
 
     public void getExecute(final HealthNewsVolleyCallback callback) {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Fetching data...");
+        progressDialog.show();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, newsApiurl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 Log.d(TAG, "onResponse() returned: " + response);
-                 callback.onSuccess(parseJsonResponse(response));
+                callback.onSuccess(parseJsonResponse(response));
+                progressDialog.hide();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "onErrorResponse: ", error);
+                if(progressDialog!=null)
+                    progressDialog.hide();
+
+                final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage(error.getMessage());
+                alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.hide();
+                    }
+                });
             }
         });
         int socketTimeout = 3 * 1000;//5 seconds - change to what you want
@@ -71,16 +91,16 @@ public class HealthNewsHttpService {
             model.status = response.getString(model.STATUS);
             if (model.status.equalsIgnoreCase("Ok") && model.totalResults > 0) {
                 JSONArray arrayArticles = response.getJSONArray(model.ARTICLES);
-                model.articles=new ArrayList<>(0);
-                for(int i=0 ;i<arrayArticles.length();i++){
+                model.articles = new ArrayList<>(0);
+                for (int i = 0; i < arrayArticles.length(); i++) {
                     JSONObject obj = arrayArticles.getJSONObject(i);
                     HealthNewsModel hnm = new HealthNewsModel();
-                    hnm.title=obj.getString(hnm.TITLE);
-                    hnm.publishedAt=obj.getString(hnm.PUBLISHEDAT);
-                    hnm.author=obj.getString(hnm.AUTHOR);
-                    hnm.description=obj.getString(hnm.DESCRIPTION);
-                    hnm.url=obj.getString(hnm.URL);
-                    hnm.urlToImage=obj.getString(hnm.URLTOIMAGE);
+                    hnm.title = obj.getString(hnm.TITLE);
+                    hnm.publishedAt = obj.getString(hnm.PUBLISHEDAT);
+                    hnm.author = obj.getString(hnm.AUTHOR);
+                    hnm.description = obj.getString(hnm.DESCRIPTION);
+                    hnm.url = obj.getString(hnm.URL);
+                    hnm.urlToImage = obj.getString(hnm.URLTOIMAGE);
 
                     model.articles.add(hnm);
                 }

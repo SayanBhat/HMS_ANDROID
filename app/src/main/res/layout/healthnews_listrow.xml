@@ -6,103 +6,91 @@
     android:id="@+id/listrow_cnstrainLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="260dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:padding="2dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
+    android:layout_margin="2dp"
+    android:background="@drawable/roundedtextview"
+    android:padding="4dp">
 
     <ImageView
         android:id="@+id/listrow_imageview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginStart="1dp"
-        android:scaleType="fitXY"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/list_image"
-        app:layout_constraintBottom_toTopOf="@+id/listrow_tvdescription"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/listrow_tvtitle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="#BF4F5B62"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#80000000"
         android:fontFamily="@font/baumans"
-        android:padding="10dp"
+        android:padding="4dp"
+        android:text="Title"
         android:textColor="@color/primaryTextColor"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="@+id/listrow_imageview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Title" />
+        app:layout_constraintTop_toTopOf="@+id/listrow_imageview"
+        app:layout_constraintVertical_bias="1.0" />
 
-
-    <TextView
-        android:id="@+id/listrow_tvdescription"
-        android:layout_width="351dp"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/nunito"
-        android:padding="10dp"
-        android:text="Description"
-        android:textColor="@color/secondaryDarkColor"
-        android:textSize="16sp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/rounded_list_row_textview"
+        android:orientation="vertical"
+        android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listrow_tvtitle"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintTop_toBottomOf="@+id/listrow_imageview"
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/listrow_tvdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baumans"
-        android:lineSpacingExtra="14sp"
-        android:text="Date:2018-03-26"
-        android:textColor="@color/primaryLightColor"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/listrow_tvdescription"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/listrow_tvdescription"
-        app:layout_constraintTop_toBottomOf="@+id/listrow_tvdescription"
-        app:layout_constraintVertical_bias="0.022" />
+        <TextView
+            android:id="@+id/listrow_tvdescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:padding="2dp"
+            android:text="Description"
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/listrow_tvauthor"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baumans"
-        android:text="By: Sayan Bhattacharya"
-        android:textColor="@color/primaryLightColor"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/listrow_tvdate"
-        app:layout_constraintHorizontal_bias="0.99"
-        app:layout_constraintStart_toStartOf="@+id/listrow_tvdate"
-        app:layout_constraintTop_toBottomOf="@+id/listrow_tvdate"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+
+            android:id="@+id/listrow_tvdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baumans"
+            android:padding="2dp"
+            android:paddingTop="4dp"
+            android:text="Date"
+            android:textColor="@color/primaryColor"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+
+        <TextView
+
+            android:id="@+id/listrow_tvauthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baumans"
+            android:padding="2dp"
+            android:text="Author"
+            android:textColor="@color/primaryColor"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
