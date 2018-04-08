@@ -1,8 +1,11 @@
 package project.sayan.hms.mFragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,16 +34,17 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class DiabeticFragment extends Fragment {
 
-    EditText etGlucose,etPressure,etBMI,etInsulin,etAge;
-    TextView tvTree,tvRegression;
-    LinearLayout resultLayout;
-    Button btResultPredict;
-    ProgressBar progressBar;
+    private EditText etGlucose,etPressure,etBMI,etInsulin,etAge;
+    private TextView tvTree,tvRegression;
+    private  LinearLayout resultLayout;
+    private  Button btResultPredict,save_result;
+    private  ProgressBar progressBar;
+    private  boolean loginStatus;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.diabetic_fragment_layout, container,false);
+        final View rootView = inflater.inflate(R.layout.diabetic_fragment_layout, container,false);
 
         etGlucose=rootView.findViewById(R.id.etdbtGlucose);
         etPressure=rootView.findViewById(R.id.etdbtBloodPressure);
@@ -52,6 +56,27 @@ public class DiabeticFragment extends Fragment {
         resultLayout=rootView.findViewById(R.id.linDBT_result_layout);
         btResultPredict=rootView.findViewById(R.id.btpredictDiabetis);
         progressBar=rootView.findViewById(R.id.progress_loaderDBT);
+        save_result=rootView.findViewById(R.id.save_buttonDiabetes);
+
+
+
+        SharedPreferences sp= getActivity().getSharedPreferences(getString(R.string.LoginCred), Context.MODE_PRIVATE);
+        loginStatus= sp.getBoolean("IS_LOGIN",false);
+        if(!loginStatus){
+            save_result.setAlpha(0.5f);
+        }
+
+        save_result.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!loginStatus)
+                {
+                    Snackbar mySnackbar = Snackbar.make(rootView.findViewById(R.id.mainLayoutDiabetes),
+                            "Sign In to save result", Snackbar.LENGTH_SHORT);
+                    mySnackbar.show();
+                }
+            }
+        });
 
         btResultPredict.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,7 +30,7 @@ public class LiverHttpService {
     private static final String TAG = "inLiverHttpService";
     private Context mContext;
     private LiverAttributesModel lam;
-    private final String getUserURL="http://10.0.2.2:2012/api/liver";
+    private final String getUserURL="http://www.healthsystem.somee.com/api/liver"; //http://10.0.2.2:2012
     ProgressDialog progressDialog;
 
     public LiverHttpService(LiverAttributesModel lam, Context context){
@@ -56,7 +56,7 @@ public class LiverHttpService {
         final LiverAttributesModel[] result = {new LiverAttributesModel()};
         try{
             progressDialog.show();
-            //progressDialog.setCancelable(false);
+            progressDialog.setCancelable(false);
             progressDialog.setMessage("Wait...");
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(lam.AGE,lam.getAge());

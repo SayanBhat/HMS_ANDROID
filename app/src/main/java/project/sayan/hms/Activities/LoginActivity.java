@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                         String password=etPassword.getText().toString().trim();
                         if(isEmailValid(email)){
                             //TODO Request UserLogin api
-                            LoginService loginService= new LoginService(LoginActivity.this,email,password);
+                            LoginService loginService= new LoginService(LoginActivity.this,email,password,null);
                             loginService.authenticateUser(new CallBackInterFace() {
                                 @Override
                                 public void onSuccss(Object object) {
@@ -125,9 +125,27 @@ public class LoginActivity extends AppCompatActivity {
                         String name =etName.getText().toString().trim();
                         String email=etEmail.getText().toString().trim();
                         String password=etPassword.getText().toString().trim();
+
                         if(isEmailValid(email)){
                            //TODO Request  user register api
+                            LoginService loginService= new LoginService(LoginActivity.this,email,password,name);
+                            loginService.registerUser(new CallBackInterFace() {
+                                @Override
+                                public void onSuccss(Object object) {
+                                    Log.w("Login Acti",object.toString());
+                                    UserModel user=(UserModel)object;
+                                    btSignIn.setText("Sign In");
+                                    btSignIn.setBackgroundColor(Color.parseColor("#263238"));
+                                    etName.setVisibility(View.GONE);
+                                    tvSignUp.setVisibility(View.VISIBLE);
+                                    tvSignIn.setVisibility(View.GONE);
+                                    FLAG_SIGNIN=true;
+                                    //setSharePreference(user);
+                                    //Toast.makeText(LoginActivity.this,user.getMessage(),Toast.LENGTH_SHORT).show();
 
+                                   // finish();
+                                }
+                            });
 
                         }
                         else {

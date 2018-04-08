@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayoutDiabetes"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:focusableInTouchMode="true"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btpredictDiabetis"
@@ -91,6 +92,27 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/save_buttonDiabetes"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="141dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/ic_save_black"
+        android:fontFamily="@font/baumans"
+        android:tooltipText="Sign in to save Result"
+        app:layout_constraintBottom_toTopOf="@+id/linDBT_result_layout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/btpredictDiabetis"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:targetApi="o" />
+
+    <Button
+
         android:id="@+id/btpredictDiabetis"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
@@ -165,8 +187,7 @@
                 android:fontFamily="@font/baumans"
                 android:text="Logistic Regression Result(probability) :"
                 android:textColor="@color/primaryColor"
-                android:textSize="16sp"
-                 />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvDBTregression"

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -31,16 +32,18 @@ import project.sayan.hms.mInterface.CallBackInterFace;
 public class LoginService {
 
     private static final String TAG = "Login Service";
-    private final String hosted_apiUrl = "http://www.healthsystem.somee.com/api/login/";
     private Context mContext;
     private ProgressDialog progressDialog;
     private String email;
     private String password;
+    private String name;
 
-    public LoginService(Context context,String email, String password) {
+
+    public LoginService(Context context,String email, String password , @Nullable String name) {
         this.mContext = context;
         this.email=email;
         this.password=password;
+        this.name=name;
         progressDialog = new ProgressDialog(context);
     }
 
@@ -55,7 +58,8 @@ public class LoginService {
         try {
             jsonObject.put(model.EMAIL, email);
             jsonObject.put(model.PASSWORD, password);
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, hosted_apiUrl, jsonObject,
+            String hosted_apiAuthUrl = "http://www.healthsystem.somee.com/api/login/";
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, hosted_apiAuthUrl, jsonObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -83,6 +87,49 @@ public class LoginService {
         }
 
     }
+
+
+    public void registerUser(final CallBackInterFace callBackInterFace)
+    {
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Wait...");
+
+        UserModel model = new UserModel();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(model.NAME,name);
+            jsonObject.put(model.EMAIL, email);
+            jsonObject.put(model.PASSWORD, password);
+            String hosted_apiRegUser = "http://www.healthsystem.somee.com/api/user";
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, hosted_apiRegUser, jsonObject,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            callBackInterFace.onSuccss(parseJsonData(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressDialog.hide();
+                    BuildAlertDialog(error.getMessage());
+                }
+            });
+            int socketTimeout = 5 * 1000;//5 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            request.setRetryPolicy(policy);
+            RequestQueue rQueue = Volley.newRequestQueue(mContext);
+            rQueue.add(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Authenticate : ", e);
+
+            progressDialog.hide();
+            BuildAlertDialog(e.getMessage());
+        }
+    }
+
 
     private UserModel parseJsonData(JSONObject response) {
         UserModel user = new UserModel();

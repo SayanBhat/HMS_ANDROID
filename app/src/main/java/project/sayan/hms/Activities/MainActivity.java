@@ -1,5 +1,7 @@
 package project.sayan.hms.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import project.sayan.hms.Model.UserModel;
 import project.sayan.hms.R;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     private TextView welcome_email;
     private TextView welcome_name;
     private final String LOGINCRED="LoginCredentials";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity
 
        navigationView= (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ViewPager_MainFragment()).commit();
@@ -58,11 +63,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        SharedPreferences sharedPref = getSharedPreferences(LOGINCRED, Context.MODE_PRIVATE);
 
         if (id == R.id.nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new ViewPager_MainFragment()).commit();
@@ -77,6 +86,16 @@ public class MainActivity extends AppCompatActivity
             toolbar.setTitle("Health News");
         } else if (id == R.id.nav_logout) {
 
+            SharedPreferences.Editor ed=sharedPref.edit();
+            ed.clear();
+            ed.apply();
+            Toast.makeText(MainActivity.this,"Signed Out Successfully",Toast.LENGTH_SHORT).show();
+            navigationView.getMenu().getItem(0).setChecked(true);
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+            welcome_email.setText("");
+            welcome_name.setText("");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ViewPager_MainFragment()).commit();
+            toolbar.setTitle("Home");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -99,6 +118,12 @@ public class MainActivity extends AppCompatActivity
 
             welcome_email.setText(sh_Pref.getString(user.NAME,""));
             welcome_name.setText(sh_Pref.getString(user.EMAIL,""));
-        } else welcome_email.setText("");
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
+        }
+        else {
+            welcome_email.setText("");
+            welcome_name.setText("");
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+        }
     }
 }

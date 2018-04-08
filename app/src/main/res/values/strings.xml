@@ -11,4 +11,5 @@
         <item>Female</item>
     </string-array>
 
+<string name="LoginCred">LoginCredentials</string>
 </resources>
