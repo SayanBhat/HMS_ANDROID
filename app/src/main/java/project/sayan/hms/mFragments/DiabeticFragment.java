@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import project.sayan.hms.Model.DiabeticModel;
 import project.sayan.hms.R;
+import project.sayan.hms.mInterface.CallBackInterFace;
 import project.sayan.hms.mServices.DiabetisHttpService;
 
 import static android.content.ContentValues.TAG;
@@ -90,8 +91,18 @@ public class DiabeticFragment extends Fragment {
                 }
 
                 if(isFieldEmpty())
-                                {
-                    new DiabetisPost().execute();
+                {
+                    DiabeticModel model = setInputValues();
+                    final DiabetisHttpService service= new DiabetisHttpService(model, getContext());
+                    service.performOperation(new CallBackInterFace() {
+                        @Override
+                        public void onSuccss(Object object) {
+                            DiabeticModel obj= (DiabeticModel)object;
+                            resultLayout.setVisibility(View.VISIBLE);
+                            tvRegression.setText(String.valueOf(obj.getLogisticProbability()));
+                            tvTree.setText(String.valueOf(obj.getDecisionResult()));
+                        }
+                    });
                 }
                 else Toast.makeText(getActivity(), "Please fill up all fields", Toast.LENGTH_SHORT).show();
             }
@@ -100,67 +111,17 @@ public class DiabeticFragment extends Fragment {
         return rootView;
     }
 
-     class DiabetisPost extends AsyncTask<String, Integer, DiabeticModel> {
-         DiabetisHttpService dbtCal;
-         DiabeticModel model= new DiabeticModel();
-         DiabeticModel resultModel;
-        @Override
-        protected DiabeticModel doInBackground(String... strings) {
-            if(model!=null){
-                dbtCal=new DiabetisHttpService(model,getContext());
-                dbtCal.performOperation();
+    private DiabeticModel setInputValues() {
+        DiabeticModel model = new DiabeticModel();
 
-
-                do{
-                    resultModel= dbtCal.getResult();
-                }while (resultModel==null);
-
-//                synchronized (this){
-//                    try {
-//                        wait(6*1000);
-//                        getActivity().runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                resultModel= dbtCal.getResult();
-//                                resultLayout.setVisibility(View.VISIBLE);
-//                                tvTree.setText(String.valueOf(resultModel.getDecisionResult()));
-//                                tvRegression.setText(String.valueOf(resultModel.getLogisticProbability()));
-//                            }
-//                        });
-//
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-            }
-            return resultModel;
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            progressBar.setVisibility(View.VISIBLE);
-
-            model.glucose= Double.parseDouble(etGlucose.getText().toString());
-            model.bloodPressure= Double.parseDouble(etPressure.getText().toString());
-            model.bmi= Double.parseDouble(etBMI.getText().toString());
-            model.insulin= Double.parseDouble(etInsulin.getText().toString());
-            model.age= Double.parseDouble(etAge.getText().toString());
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(DiabeticModel response) {
-
-            if(response!=null) {
-                progressBar.setVisibility(View.INVISIBLE);
-                resultLayout.setVisibility(View.VISIBLE);
-                tvTree.setText(String.valueOf(response.getDecisionResult()));
-                tvRegression.setText(String.valueOf(response.getLogisticProbability()));
-            }
-            super.onPostExecute(response);
-        }
+        model.setAge(Double.parseDouble(etAge.getText().toString()));
+        model.setBloodPressure(Double.parseDouble(etPressure.getText().toString()));
+        model.setBmi(Double.parseDouble(etBMI.getText().toString()));
+        model.setGlucose(Double.parseDouble(etGlucose.getText().toString()));
+        model.setInsulin(Double.parseDouble(etInsulin.getText().toString()));
+        return model;
     }
+
 
     private boolean isFieldEmpty() {
         boolean flag=true;

@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import project.sayan.hms.Model.DiabeticModel;
+import project.sayan.hms.mInterface.CallBackInterFace;
 
 /**
  * Created by Sayan on 10/26/2017.
@@ -40,7 +41,7 @@ public class DiabetisHttpService {
         progressDialog=new ProgressDialog(context);
     }
 
-    public void performOperation() {
+    public void performOperation(final CallBackInterFace callBackInterFace) {
         try {
             progressDialog.show();
             progressDialog.setCancelable(false);
@@ -57,7 +58,7 @@ public class DiabetisHttpService {
                 public void onResponse(JSONObject response) {
 
                     Log.d(TAG, "onResponse: " + response.toString());
-                    parseJsonData(response);
+                    callBackInterFace.onSuccss(parseJsonData(response));
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -101,10 +102,11 @@ public class DiabetisHttpService {
         }
     }
 
-    private void parseJsonData(JSONObject response) {
+    private DiabeticModel parseJsonData(JSONObject response) {
         resultModel= new DiabeticModel();
         resultModel.setDecisionResult(response.optDouble(DiabeticModel.DECISION_RESULT));
         resultModel.setLogisticProbability(response.optDouble(DiabeticModel.LOGISTIC_PROBABILITY));
+        return  resultModel;
     }
 
     public DiabeticModel getResult() {
